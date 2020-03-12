@@ -1,3 +1,52 @@
-# protocol
+# PA communication protocol
 
-PA inter-component messaging format
+This document describes the protocol used to communicate between
+components of PA service.
+
+## Basics
+
+The protocol is message-based. Each message is a separate unit of
+communication and has a source and a destination.
+
+Each message is either sent by the "brain" of PA and should be
+delivered to user, or sent by user and should be delivered to the
+"brain". Messages sent by schedulers to notify "brain" about certain
+events are considered to be sent by user.
+
+Each message is a single sequence of bytes (which may include unicode)
+ending with a single `LF` (`0x0A`) byte. Message cannot contain any
+other `LF` bytes.
+
+All beginning and trailing whitespace bytes should be discarded.
+
+Empty message (only whitespace characters) should be ignored (the
+"exactly one" message sent by service means there is exactly one
+non-empty message).
+
+Message body must be a valid JSON.
+
+## Routing
+
+To properly route messages within PA service these should have the
+following two fields:
+
+- `from`
+- `to`
+
+Messages sent by "brain" should have `from` field with the following
+fields:
+
+- `media`: equal to "brain"
+- `name`: name of PA instance
+
+Messages sent by "brain" should have `to` field with at least the
+following fields:
+
+- `media`: specific communication media
+
+The `to` field might have other fields related to specific media type.
+
+User-originated messages must have `to` field similar to
+brain-originated `from` and vice-versa.
+
+Messages can have other fields specific to different endpoint types.
