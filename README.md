@@ -36,13 +36,13 @@ following two fields:
 Messages sent by "brain" should have `from` field with the following
 fields:
 
-- `media`: equal to "brain"
+- `channel`: equal to "brain"
 - `name`: name of PA instance
 
 Messages sent by "brain" should have `to` field with at least the
 following fields:
 
-- `media`: specific communication media
+- `channel`: specific communication media
 
 The `to` field might have other fields related to specific media type.
 
