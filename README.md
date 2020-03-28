@@ -50,3 +50,19 @@ User-originated messages must have `to` field similar to
 brain-originated `from` and vice-versa.
 
 Messages can have other fields specific to different endpoint types.
+
+## Specific protocol details
+### Telegram messages
+
+Messages from Telegram will have their `from` field having the
+following fields:
+
+- `channel`: equal to "tg"
+- `user_id`: telegram user id of person who sent the message
+- `chat_id`: telegram channel id from which the message is forwarded
+
+Messages sent to Telegram channel should have at least the following
+fields in their `to` field:
+
+- `channel`: equal to "tg"
+- `chat_id`: telegram channel id where the messages(s) should be posted
