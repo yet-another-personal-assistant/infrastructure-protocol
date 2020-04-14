@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Telegram channel specific to/from fields
+- "subscribe" message
 ### Changed
 - "media" field is renamed to "channel"
 

@@ -51,6 +51,27 @@ brain-originated `from` and vice-versa.
 
 Messages can have other fields specific to different endpoint types.
 
+### Subscribe
+
+Since message sources and destinations can be added dynamically it
+makes sense to build routing information on the fly. Since some of the
+infrastructure nodes might have multiple possible connections there
+should be a way to advertise that certain connection should be a
+destination for certain channel. This is done using the `subscribe`
+message. The format of the message is the following:
+
+- `from`:
+  - `channel`: Name of the destination node that will handle the destination channel
+- `to`:
+  - `channel`: Name of the node that will handle the routing
+- `subscribe`: Single string or list of strings specifying the name(s) of the channel
+
+The node that receives such message should register the connection as
+a destination connection for the specified channel even if it is not
+the final destination of the `subscribe` message.
+
+#### FIXME: Unsubscribe is also needed
+
 ## Specific protocol details
 ### Telegram messages
 
